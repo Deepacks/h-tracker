@@ -1,29 +1,34 @@
-import 'state/auth_form_state.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../data_source/auth_form_data_source.dart';
+import '../data_source/auth_data_source.dart';
+import 'auth_provider.dart';
+import 'state/auth_form_state.dart';
 
 final authFormStateNotifierProvider =
     StateNotifierProvider.autoDispose<AuthFormStateNotifier, AuthFormState>(
   (ref) => AuthFormStateNotifier(
-    ref.read(authFormDataSourceProvider),
+    ref.read(authDataSourceProvider),
+    ref.read(authStateNotifierProvider.notifier).onLoggedIn,
   ),
 );
 
 class AuthFormStateNotifier extends StateNotifier<AuthFormState> {
-  final AuthFormDataSource _dataSource;
+  final AuthDataSource _dataSource;
+  final void Function() _onLoggedIn;
 
-  AuthFormStateNotifier(this._dataSource)
-      : super(const AuthFormState.initial());
+  AuthFormStateNotifier(
+    this._dataSource,
+    this._onLoggedIn,
+  ) : super(const AuthFormState.initial());
 
   Future<void> login({required String email, required String password}) async {
     state = const AuthFormState.loading();
 
     final response = await _dataSource.login(email: email, password: password);
 
-    state = response.fold(
-      (error) => AuthFormState.unauthenticated(message: error),
-      (_) => const AuthFormState.authenticated(),
+    response.fold(
+      (error) => state = AuthFormState.error(message: error),
+      (_) => _onLoggedIn(),
     );
   }
 
@@ -32,20 +37,20 @@ class AuthFormStateNotifier extends StateNotifier<AuthFormState> {
 
     final response = await _dataSource.signup(email: email, password: password);
 
-    state = response.fold(
-      (error) => AuthFormState.unauthenticated(message: error),
-      (_) => const AuthFormState.authenticated(),
+    response.fold(
+      (error) => state = AuthFormState.error(message: error),
+      (_) => _onLoggedIn(),
     );
   }
 
-  Future<void> continueWithGoogle() async {
+  Future<void> loginWithGoogle() async {
     state = const AuthFormState.loading();
 
-    final response = await _dataSource.continueWithGoogle();
+    final response = await _dataSource.loginWithGoogle();
 
-    state = response.fold(
-      (error) => AuthFormState.unauthenticated(message: error),
-      (_) => const AuthFormState.authenticated(),
+    response.fold(
+      (error) => state = AuthFormState.error(message: error),
+      (_) => _onLoggedIn(),
     );
   }
 }

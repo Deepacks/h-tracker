@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'signup_view.dart';
 import '../../../core/widgets/custom_scaffold.dart';
-import '../widget/auth_fields.dart';
 import '../providers/auth_form_provider.dart';
+import '../widget/auth_fields.dart';
 
-class LoginView extends ConsumerWidget {
-  const LoginView({super.key});
+class SigninView extends ConsumerWidget {
+  const SigninView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,28 +26,18 @@ class LoginView extends ConsumerWidget {
             onSubmit: (email, password) => ref
                 .read(authFormStateNotifierProvider.notifier)
                 .login(email: email, password: password),
-          ),
-          const SizedBox(height: 30),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('Don\'t have an account? '),
-              TextButton(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SignupView(),
-                  ),
+            link: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Don\'t have an account?'),
+                TextButton(
+                  onPressed: () => context.go('/auth/signup'),
+                  child: const Text('Sign up'),
                 ),
-                child: const Text('Signup'),
-              ),
-            ],
+              ],
+            ),
           ),
-          // const SizedBox(height: 30),
-          // Center(
-          //   child: SignInButton(Buttons.GoogleDark, onPressed: () {}),
-          // ),
         ],
       ),
     );

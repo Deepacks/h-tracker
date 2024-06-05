@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../user/providers/user_provider.dart';
 import '../../../core/widgets/custom_scaffold.dart';
+import '../../auth/providers/auth_provider.dart';
 
 class HomeView extends ConsumerWidget {
   const HomeView({super.key});
@@ -16,12 +16,14 @@ class HomeView extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextButton(
-            onPressed: () => context.go('/home/route'),
+            onPressed: () => context.go('/route'),
             child: const Text('Go to next route'),
           ),
           TextButton(
-            onPressed: () =>
-                ref.read(userStateNotifierProvider.notifier).logout(),
+            onPressed: () async {
+              context.go('/auth');
+              await ref.read(authStateNotifierProvider.notifier).logout();
+            },
             child: const Text('Logout'),
           ),
         ],

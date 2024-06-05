@@ -8,9 +8,7 @@ class AuthFormState with _$AuthFormState {
 
   const factory AuthFormState.loading() = _Loading;
 
-  const factory AuthFormState.unauthenticated({
+  const factory AuthFormState.error({
     @Default('Something went wrong') String message,
-  }) = _UnAuth;
-
-  const factory AuthFormState.authenticated() = _Authenticated;
+  }) = _Error;
 }

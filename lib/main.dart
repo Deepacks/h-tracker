@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'src/core/widgets/custom_scaffold.dart';
-import 'src/features/auth/views/login_view.dart';
+import 'src/features/auth/views/signin_view.dart';
 import 'src/features/auth/views/signup_view.dart';
+import 'src/features/auth/widget/auth_protected_shell.dart';
 import 'src/features/home/views/home_view.dart';
-import 'src/features/user/widgets/user_protected_scope.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,15 +35,23 @@ class MyApp extends StatelessWidget {
 }
 
 final _router = GoRouter(
-  initialLocation: '/home',
+  initialLocation: '/',
   routes: [
-    ShellRoute(
-      builder: (context, state, child) {
-        return UserProtectedScope(child);
-      },
+    GoRoute(
+      path: '/auth',
+      builder: (context, state) => const SigninView(),
       routes: [
         GoRoute(
-          path: '/home',
+          path: 'signup',
+          builder: (context, state) => const SignupView(),
+        ),
+      ],
+    ),
+    ShellRoute(
+      builder: (context, state, child) => AuthProtectedShell(child),
+      routes: [
+        GoRoute(
+          path: '/',
           builder: (context, state) => const HomeView(),
           routes: [
             GoRoute(
@@ -56,14 +64,6 @@ final _router = GoRouter(
           ],
         ),
       ],
-    ),
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const LoginView(),
-    ),
-    GoRoute(
-      path: '/signup',
-      builder: (context, state) => const SignupView(),
     ),
   ],
 );

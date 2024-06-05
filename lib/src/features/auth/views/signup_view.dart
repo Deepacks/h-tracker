@@ -25,10 +25,6 @@ class SignupView extends ConsumerWidget {
                 .read(authFormStateNotifierProvider.notifier)
                 .signup(email: email, password: password),
           ),
-          // const SizedBox(height: 30),
-          // Center(
-          //   child: SignInButton(Buttons.GoogleDark, onPressed: () {}),
-          // ),
         ],
       ),
     );

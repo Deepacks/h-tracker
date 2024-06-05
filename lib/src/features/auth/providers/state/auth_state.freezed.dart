@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user_state.dart';
+part of 'auth_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$UserState {
+mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -63,15 +63,15 @@ mixin _$UserState {
 }
 
 /// @nodoc
-abstract class $UserStateCopyWith<$Res> {
-  factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
-      _$UserStateCopyWithImpl<$Res, UserState>;
+abstract class $AuthStateCopyWith<$Res> {
+  factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
+      _$AuthStateCopyWithImpl<$Res, AuthState>;
 }
 
 /// @nodoc
-class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
-    implements $UserStateCopyWith<$Res> {
-  _$UserStateCopyWithImpl(this._value, this._then);
+class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
+    implements $AuthStateCopyWith<$Res> {
+  _$AuthStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -88,7 +88,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$UserStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$AuthStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -102,7 +102,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'UserState.initial()';
+    return 'AuthState.initial()';
   }
 
   @override
@@ -183,7 +183,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements UserState {
+abstract class _Initial implements AuthState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -196,7 +196,7 @@ abstract class _$$UnauthenticatedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$UnauthenticatedImplCopyWithImpl<$Res>
-    extends _$UserStateCopyWithImpl<$Res, _$UnauthenticatedImpl>
+    extends _$AuthStateCopyWithImpl<$Res, _$UnauthenticatedImpl>
     implements _$$UnauthenticatedImplCopyWith<$Res> {
   __$$UnauthenticatedImplCopyWithImpl(
       _$UnauthenticatedImpl _value, $Res Function(_$UnauthenticatedImpl) _then)
@@ -210,7 +210,7 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
 
   @override
   String toString() {
-    return 'UserState.unauthenticated()';
+    return 'AuthState.unauthenticated()';
   }
 
   @override
@@ -291,7 +291,7 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
   }
 }
 
-abstract class _Unauthenticated implements UserState {
+abstract class _Unauthenticated implements AuthState {
   const factory _Unauthenticated() = _$UnauthenticatedImpl;
 }
 
@@ -304,7 +304,7 @@ abstract class _$$authenticatedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$authenticatedImplCopyWithImpl<$Res>
-    extends _$UserStateCopyWithImpl<$Res, _$authenticatedImpl>
+    extends _$AuthStateCopyWithImpl<$Res, _$authenticatedImpl>
     implements _$$authenticatedImplCopyWith<$Res> {
   __$$authenticatedImplCopyWithImpl(
       _$authenticatedImpl _value, $Res Function(_$authenticatedImpl) _then)
@@ -318,7 +318,7 @@ class _$authenticatedImpl implements _authenticated {
 
   @override
   String toString() {
-    return 'UserState.authenticated()';
+    return 'AuthState.authenticated()';
   }
 
   @override
@@ -399,6 +399,6 @@ class _$authenticatedImpl implements _authenticated {
   }
 }
 
-abstract class _authenticated implements UserState {
+abstract class _authenticated implements AuthState {
   const factory _authenticated() = _$authenticatedImpl;
 }

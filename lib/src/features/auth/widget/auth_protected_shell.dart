@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:h_tracker/src/core/widgets/custom_scaffold.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../providers/user_provider.dart';
+import '../../../core/widgets/custom_scaffold.dart';
+import '../providers/auth_provider.dart';
 
-class UserProtectedScope extends ConsumerWidget {
+class AuthProtectedShell extends ConsumerWidget {
   final Widget child;
 
-  const UserProtectedScope(this.child, {super.key});
+  const AuthProtectedShell(this.child, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userState = ref.watch(userStateNotifierProvider);
+    final userState = ref.watch(authStateNotifierProvider);
 
     return userState.maybeWhen(
       orElse: () => CustomScaffold.empty(),
-      authenticated: () => child,
       unauthenticated: () {
         WidgetsBinding.instance.addPostFrameCallback(
-          (_) => context.go('/login'),
+          (_) => context.go('/auth'),
         );
+
         return CustomScaffold.empty();
       },
+      authenticated: () => child,
     );
   }
 }
